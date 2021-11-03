@@ -21,10 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-if os.path.exists("env.py"):
-    import env
-    
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_FILE = os.path.join('C:\Programming\CI-hello-django\CI-hello-django\django_todo', 'secret.txt')
+try:
+    SECRET_KEY = open(SECRET_FILE).read().strip()
+except IOError:
+    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
